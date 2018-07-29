@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         //List layout
         mLayoutManager = new LinearLayoutManager(this);
         //Grid layout
-        mLayoutManager = new GridLayoutManager(this,2);
+        //mLayoutManager = new GridLayoutManager(this,2);
         //Grid layout with random sizes
         //iF you uses this layout you should disable "setHasFixedSize"
         //mLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(movies, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie movie, int position) {
-                deleteName(position);
+                deleteMovie(position);
             }
         });
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.add_menu:
-                this.addName(0);
+                this.addMovie(0);
                 return  true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
         }};
     }
 
-    private void addName(int position){
+    private void addMovie(int position){
         movies.add(position, new Movie("New movie", R.drawable.poster));
         mAdapter.notifyItemInserted(position);
         mLayoutManager.scrollToPosition(position);
     }
 
-    private void deleteName(int position){
+    private void deleteMovie(int position){
         movies.remove(position);
         mAdapter.notifyItemRemoved(position);
     }
